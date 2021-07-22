@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+
+body{
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.container{
+    width: 80%;
+    max-width: 700px;
+    border: 10px solid paleturquoise;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+.date{
+    color: dodgerblue;
+    text-transform: uppercase;
+}
+
+.quote{
+    border-left: 5px solid gray;
+    padding-left: 5px;
+}
+
+.separator{
+    color: dodgerblue;
+}

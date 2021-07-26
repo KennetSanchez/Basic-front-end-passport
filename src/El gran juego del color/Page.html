@@ -7,12 +7,12 @@
     <title>Juego del color</title>
     
     <link rel = "stylesheet" href= "style3.css">
-    <script src = "Script.js">  </script>
+    
 
     <section class = header>    
 
         <h2>EL GRAN </h2>
-        <section id = display><label id = display></label></section>
+        <h1 id = display></h1>
         <h2>JUEGO DEL COLOR</h2>
 
         
@@ -21,12 +21,12 @@
 <body>
     <section class="menu">
         <button class = "buttonsM" id = "btm1" onclick="restart()">Nuevo juego</button>
-        <label id = message>Intenta de nuevo</label>
-        <button class = "buttonsM" id = "btm3" onclick="check()">Novato</button>
-        <button class = "buttonsM" id = "btm4" onclick="check()">Experto</button>
+        <label id = message></label>
+        <button class = "buttonsM" id = "btm2" onclick="beginner()">Novato</button>
+        <button class = "buttonsM" id = "btm3" onclick="professional()">Experto</button>
     </section>
 
-    <section class=boxes>
+    <section id = boxes>
         <section class="buttonsS">
             <button class = "bbtn" id = "bt1" onclick="check(this)"></button>
             <button class = "bbtn" id = "bt2" onclick="check(this)"></button>
@@ -37,5 +37,6 @@
             <button class = "bbtn" id = "bt6" onclick="check(this)"></button>
         </section>
     </section>
+    <script src = "Script.js">  </script>
 </body>
 </html>

@@ -1,36 +1,30 @@
 
-var colors = generateColors();
-var buttons = document.getElementsByClassName(".bbtn");
-var msg = document.getElementById("#message");
-console.log(msg);
 var num = 6;
-
+var backgroundColorDefault = "#232323";
+var colors = generateColors();
 var selectedColor = randomColor();
-var displayedColor = document.getElementById("#display");
-console.log(displayedColor);
-displayedColor[0].innerText = selectedColor;
+
+var buttons = document.getElementsByClassName("bbtn");
+var msg = document.getElementById("message");
+var container = document.getElementById("boxes");
+
+var displayedColor = document.getElementById("display");
+
 
 var resetbtn = document.getElementsByName("#bt1");
 
+function restart(x = 6){
+    num = x;
 
-for(let i = 0; i < buttons.length ; i++){
-    buttons[i].style.backgroundColor = colors[i];
-}
+    setUp();
+    displayedColor.textContent = selectedColor;
+    colors = generateColors();
+    selectedColor = pickedColor();
 
-function changeColors(){
-    let h1 = document.querySelector("h1");
-    for(let i = 0 ; i < buttons.length ; i++){
-        buttons[i].style.backgroundColor = color;
+    container.style.background = backgroundColorDefault;
+    for(let i = 0; i < buttons.length ; i++){
+        buttons[i].style.backgroundColor = colors[i];
     }
-    h1.style.backgroundColor = color;
-}
-
-function randomColor(){
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-
-    return "rgb(" + r + ", " + g + ", " + b +")";
 }
 
 function generateColors(){
@@ -41,46 +35,82 @@ function generateColors(){
     return arr;    
 }
 
+function randomColor(){
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+
+    return "rgb(" + r + ", " + g + ", " + b +")";
+}
+
 function pickedColor(){
     let s = Math.floor(Math.random() * colors.length);
     return colors[s];
 }
 
-function restart(){
-  
-    colors = generateColors();
-    selectedColor = pickedColor();
-
-    for(let i = 0; i < buttons.length ; i++){
-        buttons[i].style.backgroundColor = colors[i];
-        
-        if(colors[i]){
-            buttons[i].style.backgroundColor = colors[i];
-            buttons.style.display = "block";
-        }else{
-            buttons.style.display = "none";
-        }
+function check(x){
+    var clickedColor = x.style.backgroundColor;
+    if(clickedColor === selectedColor){
+        msg.textContent = "¡Ganaste!";
+        won();
+    }else{
+        x.style.backgroundColor = backgroundColorDefault;
+        msg.textContent = "Intenta de nuevo";
     }
+}
+
+function won(){
+    for(let i = 0; i < buttons.length ; i++){
+        buttons[i].style.backgroundColor = selectedColor;       
+    }
+    container.style.backgroundColor = selectedColor;
+    setTimeout(restartWithDelay, 1000); 
+}
+
+function restartWithDelay(){
+    restart(num);
+}
+
+function beginner(){
+    num = 3;
+    restart(3);
+}
+
+function professional(){
+    num = 6;
+    restart(6);
 }
 
 function setUpButtons(){
     for(let i = 0; i < buttons.length ; i++){
-        modeBtns[i].addEventListener("click", function(){
-            modeBtns[0].classList.remove("selected");
-            modeBtns[1].classList.remove("selected");
-            this.classList;
+        buttons[i].addEventListener("click", function(){
+            buttons[0].classList.remove("selected");
+            buttons[1].classList.remove("selected");
+            this.classList.add("selected");
         })
     }
 }
 
-function check(x){
-    var clickedColor = x.style.backgroundColor;
-    if(clickedColor === selectedColor){
-        msg[0].textContent = "Intenta de nuevo";
-    }else{
-        x.style.backgroundColor = "#232323";
+
+function setUpColors(){
+    for(let i = 0; i < buttons.length ; i ++){
+        buttons[i].style.backgroundColor = colors[i];
     }
 }
+
+function setUp(){
+    msg.textContent = "";
+    if(num == 3){
+        for(let i = num ; i < buttons.length ; i++){
+            buttons[i].style.display = "none";
+        }
+    }else{
+        for(let i = 0 ; i < buttons.length ; i++){
+            buttons[i].style.display = "inline-block";
+        }
+    }
+}
+
 restart();
 setUpButtons();
-//setUpColors();
+setUpColors();
